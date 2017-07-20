@@ -4,6 +4,10 @@ import com.fasterxml.jackson.annotation.JsonView;
 import com.womantalk.client.question.Question;
 import com.womantalk.client.quizrules.QuizRules;
 import com.womantalk.client.quiztype.QuizType;
+<<<<<<< HEAD
+=======
+import com.womantalk.client.tools.View;
+>>>>>>> 965648bde16c8b7d7278a6923bba40f9a19271be
 
 import javax.persistence.*;
 import java.util.Date;

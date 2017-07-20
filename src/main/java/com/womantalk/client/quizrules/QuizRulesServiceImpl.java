@@ -12,6 +12,7 @@ public class QuizRulesServiceImpl implements QuizRulesService {
     private QuizRulesRepository quizRulesRepository;
 
 
+<<<<<<< HEAD
 
     @Override
     public List<QuizRules> findAllByValue() {
@@ -23,4 +24,16 @@ public class QuizRulesServiceImpl implements QuizRulesService {
         }
     }
 
+=======
+    @Override
+    public List<QuizRules> findResult() {
+        return quizRulesRepository.findAll();
+    }
+
+    @Override
+    public List<QuizRules> getResult(Integer score)
+    {
+        return quizRulesRepository.getResult(score);
+    }
+>>>>>>> 965648bde16c8b7d7278a6923bba40f9a19271be
 }

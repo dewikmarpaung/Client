@@ -2,7 +2,11 @@ package com.womantalk.client.quizrules;
 
 import com.fasterxml.jackson.annotation.JsonView;
 import com.womantalk.client.quiz.Quiz;
+<<<<<<< HEAD
 import com.womantalk.client.quiz.View;
+=======
+import com.womantalk.client.tools.View;
+>>>>>>> 965648bde16c8b7d7278a6923bba40f9a19271be
 
 import javax.persistence.*;
 

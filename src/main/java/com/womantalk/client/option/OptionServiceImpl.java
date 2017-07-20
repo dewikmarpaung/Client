@@ -32,4 +32,18 @@ public class OptionServiceImpl implements OptionService {
 
         return optionRepository.findAllOptionByQuestion(question.getIdQuestion());
     }
+<<<<<<< HEAD
+=======
+
+    @Override
+    public List<Option> findAllOption() {
+        return optionRepository.findAll();
+    }
+
+    @Override
+    public Integer findValueByIdOption(Integer idOption)
+    {
+        return optionRepository.getOne(idOption).getValue();
+    }
+>>>>>>> 965648bde16c8b7d7278a6923bba40f9a19271be
 }

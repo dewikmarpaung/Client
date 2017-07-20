@@ -4,7 +4,10 @@ import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonPropertyOrder;
 import com.fasterxml.jackson.annotation.JsonView;
+<<<<<<< HEAD
 import com.womantalk.client.quiz.View;
+=======
+>>>>>>> 965648bde16c8b7d7278a6923bba40f9a19271be
 import javafx.scene.control.Pagination;
 
 /**

@@ -19,16 +19,24 @@ public class QuizType
     private String typeName;
 
     @OneToMany (mappedBy = "quizType", cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+<<<<<<< HEAD
     //@JsonBackReference
     //@JsonIgnore
     //@JsonManagedReference
+=======
+>>>>>>> 965648bde16c8b7d7278a6923bba40f9a19271be
     private Set<Quiz> quizs;
 
     @Version
     @Column(name = "optVersion", columnDefinition = "integer DEFAULT 0 ")
     private Integer version;
 
+<<<<<<< HEAD
     public QuizType() {
+=======
+    public QuizType()
+    {
+>>>>>>> 965648bde16c8b7d7278a6923bba40f9a19271be
     }
 
     public Integer getIdQuizType() {
@@ -47,6 +55,7 @@ public class QuizType
         this.typeName = typeName;
     }
 
+<<<<<<< HEAD
 //    public Set<Quiz> getQuizs() {
 //        return quizs;
 //    }
@@ -56,6 +65,8 @@ public class QuizType
 //        this.quizs = quizs;
 //    }
 
+=======
+>>>>>>> 965648bde16c8b7d7278a6923bba40f9a19271be
     public Integer getVersion() {
         return version;
     }

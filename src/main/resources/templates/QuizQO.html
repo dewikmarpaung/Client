@@ -1,0 +1,25 @@
+<html xmlns:th="http://www.thymeleaf.org" xmlns:fmt="http://www.w3.org/1999/html">
+<head>
+    <title>Fun Quiz</title>
+</head>
+<body>
+<h2>Kuis</h2>
+<div th:each="quizs: ${quiz}">
+    <div th:action="@{/quiz/tampilanQuiz/{idQuiz}}">
+        <th th:text="${quiz.judulQuiz}"></th>
+    </div>
+</div>
+<h1>Question</h1>
+
+<div th:each="questions: ${question}">
+    <div th:action="@{/quiz/tampilanQuiz/{idQuiz}}">
+        <th th:text="${questions.question}"></th>
+        <ul>
+        <div th:each="options: ${option}" >
+            <input type="radio" name="option" th:if="${options.question.idQuestion == questions.idQuestion}" th:text="${options.text}" />
+        </div>
+        </ul>
+    </div>
+</div>
+</body>
+</html>
