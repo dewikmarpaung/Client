@@ -2,11 +2,7 @@ package com.womantalk.client.option;
 
 import com.fasterxml.jackson.annotation.JsonView;
 import com.womantalk.client.question.Question;
-<<<<<<< HEAD
-import com.womantalk.client.quiz.View;
-=======
 import com.womantalk.client.tools.View;
->>>>>>> 965648bde16c8b7d7278a6923bba40f9a19271be
 
 import javax.persistence.*;
 
@@ -34,19 +30,12 @@ public class Option
 
     @ManyToOne (fetch = FetchType.EAGER)
     @JoinColumn (name = "id_question")
-<<<<<<< HEAD
-   // @JsonIgnore
-    private Question question;
-
-    public Option() {
-=======
     // @JsonIgnore
     private Question question;
 
     public Option()
     {
 
->>>>>>> 965648bde16c8b7d7278a6923bba40f9a19271be
     }
 
     public Integer getIdOption()
@@ -106,10 +95,7 @@ public class Option
 
     public void setQuestion(Question question)
     {
-<<<<<<< HEAD
-=======
 
->>>>>>> 965648bde16c8b7d7278a6923bba40f9a19271be
         this.question = question;
     }
 }

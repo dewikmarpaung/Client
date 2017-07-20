@@ -12,19 +12,6 @@ public class QuizRulesServiceImpl implements QuizRulesService {
     private QuizRulesRepository quizRulesRepository;
 
 
-<<<<<<< HEAD
-
-    @Override
-    public List<QuizRules> findAllByValue() {
-        List<QuizRules> quizRulesList = quizRulesRepository.findAll();
-        if(quizRulesList!=null) {
-            return quizRulesList;
-        }else {
-            return null;
-        }
-    }
-
-=======
     @Override
     public List<QuizRules> findResult() {
         return quizRulesRepository.findAll();
@@ -35,5 +22,4 @@ public class QuizRulesServiceImpl implements QuizRulesService {
     {
         return quizRulesRepository.getResult(score);
     }
->>>>>>> 965648bde16c8b7d7278a6923bba40f9a19271be
 }

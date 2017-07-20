@@ -2,17 +2,6 @@ package com.womantalk.client.quiz;
 
 import com.fasterxml.jackson.annotation.JsonView;
 import com.womantalk.client.option.OptionService;
-<<<<<<< HEAD
-import com.womantalk.client.question.QuestionService;
-import com.womantalk.client.tools.ModelToResponseMapper;
-import com.womantalk.client.tools.Response;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RestController;
-
-=======
 import com.womantalk.client.quizrules.QuizRules;
 import com.womantalk.client.quizrules.QuizRulesService;
 import com.womantalk.client.tools.ModelToResponseMapper;
@@ -22,7 +11,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.ArrayList;
->>>>>>> 965648bde16c8b7d7278a6923bba40f9a19271be
 import java.util.List;
 
 /**
@@ -39,11 +27,7 @@ public class QuizAPIController
     OptionService optionService;
 
     @Autowired
-<<<<<<< HEAD
-    QuestionService questionService;
-=======
     QuizRulesService quizRulesService;
->>>>>>> 965648bde16c8b7d7278a6923bba40f9a19271be
 
     @JsonView (View.Quiz.class)
     @RequestMapping(value ="/API/Quiz/getAllQuiz", method = RequestMethod.GET)
@@ -62,8 +46,6 @@ public class QuizAPIController
     }
 
 
-<<<<<<< HEAD
-=======
     @JsonView(View.QuizRules.class)
     @RequestMapping (value ="API/Quiz/ShowResultQuiz", method = RequestMethod.POST)
     @ResponseBody
@@ -99,7 +81,6 @@ public class QuizAPIController
     }*/
 
 
->>>>>>> 965648bde16c8b7d7278a6923bba40f9a19271be
    /* //@JsonView(View.Public.class)
     @RequestMapping(value ="/API/Quiz/getAllDataQuiz/{idQuiz}", method = RequestMethod.GET)
     public Response<List<Quiz>> getAllQuizById (@PathVariable Integer idQuiz)

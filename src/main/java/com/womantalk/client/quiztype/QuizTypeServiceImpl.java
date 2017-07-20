@@ -12,12 +12,8 @@ public class QuizTypeServiceImpl implements QuizTypeService {
 
 
     @Override
-<<<<<<< HEAD
-    public List<QuizType> findAll() {
-=======
     public List<QuizType> findAll()
     {
->>>>>>> 965648bde16c8b7d7278a6923bba40f9a19271be
         List quizTypeList = quizTypeRepository.findAll();
         if (quizTypeList != null) {
             return quizTypeList;
