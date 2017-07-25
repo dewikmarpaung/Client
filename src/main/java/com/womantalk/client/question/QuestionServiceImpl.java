@@ -1,12 +1,16 @@
 package com.womantalk.client.question;
 
+import com.womantalk.client.quiz.Quiz;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
+import java.util.ArrayList;
+import java.util.List;
 
 @Service
 public class QuestionServiceImpl implements QuestionService
 {
 
-/*
     @Autowired
     QuestionRepository questionRepository;
 
@@ -35,5 +39,5 @@ public class QuestionServiceImpl implements QuestionService
             }
         }
         return questionsByIdQuiz;
-    }*/
+    }
 }

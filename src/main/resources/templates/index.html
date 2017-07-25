@@ -21,6 +21,7 @@
 
 <!-- js -->
 <script th:src="@{js/jquery-1.11.1.min.js}"></script>
+<script th:src="@{//code.jquery.com/jquery-3.1.0.min.js}"></script>
 <!-- //js --> 
 
 </head>
@@ -57,9 +58,8 @@
 							<header>
 								<h3 class="w3ltitle">Quizzes</h3>
 							</header>
-							<div id="list_quizzes" class="container">
-								<a href="#"><div id="images" ></div></a>
-								<a href="#"><div id="title"></div></a>
+							<div id="list_quizzes">
+
 							</div>
 						</section>
 					</div>
@@ -71,7 +71,7 @@
 							</header>
 
 							<div class="w3ls-pince">
-								<h4><a href="#"><div id="trendingQuiz"></div></a></h4>
+								<a href="question"><div><h4 id="trendingQuiz"></h4></div></a>
 							</div>
 
 						</section>
@@ -112,6 +112,7 @@
 		</div>
 	</div>
 	<!-- //services -->
+
 	<!-- footer -->
 	<div class="footer">
 

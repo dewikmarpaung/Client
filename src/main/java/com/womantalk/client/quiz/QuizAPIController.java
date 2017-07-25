@@ -47,7 +47,7 @@ public class QuizAPIController
 
 
     @JsonView(View.QuizRules.class)
-    @RequestMapping (value ="API/Quiz/ShowResultQuiz", method = RequestMethod.POST)
+    @RequestMapping (value ="/API/Quiz/ShowResultQuiz", method = RequestMethod.POST)
     @ResponseBody
     public Response <List<QuizRules>> showResult
             (@RequestParam ("idQuiz")long idQuiz, @RequestParam ("idOption") String idOptions)
