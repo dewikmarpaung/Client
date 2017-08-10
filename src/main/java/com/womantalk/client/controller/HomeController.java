@@ -2,6 +2,9 @@ package com.womantalk.client.controller;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 @Controller
 public class HomeController {
@@ -10,8 +13,8 @@ public class HomeController {
         return "index";
     }
 
-    @RequestMapping("/question")
-    public String question() {
+    @RequestMapping(value = "/question", params = {"idQuiz"})
+    public String question(@RequestParam(value = "idQuiz") int id) {
         return "question";
     }
 }

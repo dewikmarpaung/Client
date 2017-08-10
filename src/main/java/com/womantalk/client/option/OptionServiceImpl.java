@@ -43,4 +43,10 @@ public class OptionServiceImpl implements OptionService {
     {
         return optionRepository.getOne(idOption).getValue();
     }
+
+    @Override
+    public List<Option> findRightAnswer()
+    {
+        return optionRepository.findRightAnswer();
+    }
 }

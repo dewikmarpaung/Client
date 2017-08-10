@@ -6,19 +6,20 @@ import org.springframework.stereotype.Service;
 import java.util.List;
 
 @Service
-public class QuizTypeServiceImpl implements QuizTypeService {
+public class QuizTypeServiceImpl implements QuizTypeService
+{
     @Autowired
     private QuizTypeRepository quizTypeRepository;
 
 
-    @Override
-    public List<QuizType> findAll()
-    {
-        List quizTypeList = quizTypeRepository.findAll();
-        if (quizTypeList != null) {
-            return quizTypeList;
-        } else {
-            return null;
-        }
-    }
+  @Override
+    public List<QuizType> findAll() {
+      List quizTypeList = quizTypeRepository.findAll();
+      if (quizTypeList != null) {
+          return quizTypeList;
+      } else {
+          return null;
+      }
+
+  }
 }

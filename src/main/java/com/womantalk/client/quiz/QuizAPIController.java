@@ -10,12 +10,7 @@ import com.womantalk.client.tools.View;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.ArrayList;
 import java.util.List;
-
-/**
- * Created by Chintya on 7/13/2017.
- */
 
 @RestController
 public class QuizAPIController
@@ -29,46 +24,40 @@ public class QuizAPIController
     @Autowired
     QuizRulesService quizRulesService;
 
-    @JsonView (View.Quiz.class)
+    /*@JsonView (View.Quiz.class)
     @RequestMapping(value ="/API/Quiz/getAllQuiz", method = RequestMethod.GET)
-    public Response<List<Quiz>> getAllQuiz ()
+    public Response<List<Quiz>> getAllQuiz
+            (@RequestParam (value = "offset", required = false, defaultValue = "0") int offset,
+             @RequestParam(value = "limit", required = false, defaultValue = "3") int limit) throws Exception
     {
-        List<Quiz> quizzes = quizService.findAllQuizByStatus();
-        return ModelToResponseMapper.mapThisSuccess(quizzes);
+        return quizService.getAllQuizByStatus(offset, limit);
     }
+*/
 
     @JsonView (View.AllQuiz.class)
     @RequestMapping(value ="/API/Quiz/getQuiz/{idQuiz}", method = RequestMethod.GET)
-    public Response<List<Quiz>> getAllQuiz (@PathVariable Integer idQuiz)
+    public Response<List<Quiz>> getAllQuizByIdQuiz (@PathVariable Integer idQuiz)
     {
-        List<Quiz> quizzes = quizService.findQuizByIdQuiz(idQuiz);
-        return ModelToResponseMapper.mapThisSuccess(quizzes);
+      return quizService.getAllQuizByIdQuiz(idQuiz);
     }
 
 
     @JsonView(View.QuizRules.class)
-    @RequestMapping (value ="/API/Quiz/ShowResultQuiz", method = RequestMethod.POST)
+    @RequestMapping (value ="API/Quiz/ShowResultQuiz", method = RequestMethod.POST)
     @ResponseBody
     public Response <List<QuizRules>> showResult
             (@RequestParam ("idQuiz")long idQuiz, @RequestParam ("idOption") String idOptions)
     {
-        String [] idOptionsArray = idOptions.split(",");
-        int score = 0;
-        for (int indexIdOption = 0; indexIdOption < idOptionsArray.length;indexIdOption++)
-        {
-            score += optionService.findValueByIdOption(Integer.parseInt(idOptionsArray[indexIdOption]));
-        }
-        List <QuizRules> allQuizRules = quizRulesService.findResult();
-        List <QuizRules> quizRulesList = new ArrayList<QuizRules>();
-        for (QuizRules quizRules : allQuizRules){
-            if( score >= quizRules.getMin() && score <= quizRules.getMax() && quizRules.getQuiz().getIdQuiz() == idQuiz)
-            {
-                quizRulesList.add(quizRules);
-               /* System.out.println(score);
-                System.out.println(quizRules.getDescription());*/
-            }
-        }
-        return ModelToResponseMapper.mapThisSuccess(quizRulesList);
+        return quizService.showResult(idQuiz, idOptions);
+    }
+
+
+    @JsonView (View.Quiz.class)
+    @RequestMapping(value ="/API/Quiz/getAllQuizByStatus")
+    public Response<List<Quiz>> getAllQuizByStatus(String status, @RequestParam ("idQuiz") Integer id)
+    {
+        List <Quiz> quizzes = quizService.findTop3ByStatusOrderByIdQuizDesc(status, id);
+        return ModelToResponseMapper.mapThisSuccess(quizzes);
     }
 
 /*

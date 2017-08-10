@@ -20,8 +20,9 @@
     <!-- //Custom Theme files -->
 
     <!-- js -->
+
+    <!-- //xjs -->
     <script th:src="@{js/jquery-1.11.1.min.js}"></script>
-    <!-- //js -->
 
 </head>
 
@@ -54,12 +55,10 @@
             <div class="row">
                 <div class="9u 12u(mobile)">
                     <section>
-                        <header>
-                            <h3 class="w3ltitle"><div id="judul_quiz"></div></h3>
-                        </header>
-                        <div id="list_question" class="container">
 
+                        <div id="list_question">
                         </div>
+
                     </section>
                 </div>
 
@@ -127,5 +126,9 @@
 ================================================== -->
 <!-- Placed at the end of the document so the pages load faster -->
 <script th:src="@{js/bootstrap.js}"></script>
+<!--<script th:src="@{js/pages/main.js}"></script>-->
+<script th:src="@{js/pages/script.js}"></script>
+<script th:src="@{js/pages/question.js}"></script>
+
 </body>
 </html>

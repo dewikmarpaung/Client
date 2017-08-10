@@ -9,4 +9,5 @@ public interface OptionService {
     List<Option> findOptionByQuestion(Question question);
     List<Option> findAllOption();
     Integer findValueByIdOption(Integer idOption);
+    List<Option> findRightAnswer ();
 }
