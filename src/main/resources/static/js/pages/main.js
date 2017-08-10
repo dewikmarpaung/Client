@@ -1,6 +1,7 @@
 var id;
 var WTAPI = "http://localhost:8080/API/Quiz/getAllQuizByStatus";
 
+
 $(document).ready(function(){
     LoadFirst();
     $(window).scroll(function () {
@@ -76,6 +77,7 @@ function LoadFirst() {
         type: "POST",
         data : jQuery.param({idQuiz : id}),
         dataType: "json",
+
         success: function (json) {
             $.each(json.data, function (i, item) {
                 id = item.idQuiz;
@@ -95,7 +97,8 @@ function LoadFirst() {
                     .css('width','400px')
                     .css('margin-left', '260px')
                     .css('margin-top', '-110px')
-                    .appendTo(image);
+                    .appendTo(title);
+
 
                 var wrapper = document.createElement("li");
                 wrapper.className = "itemList";

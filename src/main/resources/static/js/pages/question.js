@@ -1,5 +1,8 @@
 var api = "http://localhost:8080/API/Quiz/getQuiz/";
 
+var resultAPI = "http://localhost:8080/API/Quiz/ShowResultQuiz";
+
+
     var url = new URL(window.location.href);
     var id = url.searchParams.get("idQuiz");
     var result = "";
@@ -119,6 +122,7 @@ var api = "http://localhost:8080/API/Quiz/getQuiz/";
                             .css('height', '20px')
                             .css('width', '20px')
                             .click(function () {
+
                                 var $this = $(this);
                                 var childs = $(this).parents('.optionContainer').find('li');
                                 var input = $(this).parents('.optionContainer').find('input');
@@ -144,7 +148,7 @@ var api = "http://localhost:8080/API/Quiz/getQuiz/";
                                             //childs.css('border', '2px solid green');
                                         }
                                     }
-                                    alert("id : " + result);
+                                 //   alert("id : " + result);
                                 } else {
                                     //alert('unchecked');
                                     $this.attr('checked',false);
@@ -158,8 +162,9 @@ var api = "http://localhost:8080/API/Quiz/getQuiz/";
                                     for(var i=0;i<temp.length-2;i++){
                                         result += temp[i] +',';
                                     }
-                                    alert("id : " + result);
+                                  //  alert("id : " + result);
                                 }
+
 
                             })
                         );
@@ -179,6 +184,7 @@ var api = "http://localhost:8080/API/Quiz/getQuiz/";
                             .css('height', '20px')
                             .css('width', '20px')
                             .click(function () {
+
                                 var $this = $(this);
                                 var childs = $(this).parents('.optionContainer').find('li');
                                 var input = $(this).parents('.optionContainer').find('input');
@@ -204,7 +210,7 @@ var api = "http://localhost:8080/API/Quiz/getQuiz/";
                                             //childs.css('border', '2px solid green');
                                         }
                                     }
-                                    alert("id : " + result);
+                                  //  alert("id : " + result);
                                 } else {
                                     //alert('unchecked');
                                     $this.attr('checked',false);
@@ -218,7 +224,7 @@ var api = "http://localhost:8080/API/Quiz/getQuiz/";
                                     for(var i=0;i<temp.length-2;i++){
                                         result += temp[i] +',';
                                     }
-                                    alert("id : " + result);
+                                   // alert("id : " + result);
                                 }
                             })
                         );
@@ -228,6 +234,7 @@ var api = "http://localhost:8080/API/Quiz/getQuiz/";
                     subOption.appendChild(checkboxOption);
                     optionList.appendChild(subOption);
                     optionContainer.appendChild(optionList);
+
 
                     if (lengthOptions % 3 == 0 || lengthOptions == 5) {
                         optionWrapper_3.appendChild(optionContainer);
@@ -240,7 +247,6 @@ var api = "http://localhost:8080/API/Quiz/getQuiz/";
                 });
 
                 questionWrapper.appendChild(optionWrapper);
-
                 wrapper.appendChild(questionWrapper);
 
             });
@@ -249,6 +255,85 @@ var api = "http://localhost:8080/API/Quiz/getQuiz/";
 
         }
     });
+
+
+$( document ).ready(function()
+{
+    var wrapper = document.createElement("div");
+    wrapper.className = "button";
+    $( "#button" ).click(function()
+    {
+       // $( "div" ).show( "slow" );
+        $.ajax
+        ({
+            url: resultAPI,
+            type: "POST",
+            dataType :"json",
+            data : jQuery.param({idQuiz : id, idOption : result}),
+            success: function (json)
+            {
+                $.each(json.data, function (i, item)
+                {
+                    id = item.idQuiz;
+                    var value = document.createElement("div");
+                    $("<h3>").html(item.value)
+                        .attr('data-id',item.idQuiz)
+                        .css('height','100px')
+                        .css('width','400px')
+                        .css('margin-left', '6px')
+                        .css('margin-top', '4px ')
+                        .appendTo(value);
+
+                    var description = document.createElement("div");
+                    $("<h5>").html(item.description)
+                        .attr('data-id',item.idQuiz)
+                        .css('height','100px')
+                        .css('width','400px')
+                        .css('margin-left', '42px')
+                        .css('margin-top', '-63px')
+                        .appendTo(description);
+
+
+                    var image = document.createElement("div");
+                    $("<img>").attr("src", item.imageURL)
+                        .attr('data-id',item.idQuiz)
+                        .css('height','287px')
+                        .css('width','574px')
+                        .css('padding','15px')
+                        .css('margin-top', ' -82px')
+                        .css('margin-left', '25px')
+                        .appendTo(image);
+
+                    var wrapper = document.createElement("div");
+                    wrapper.className = "hasil";
+
+                    wrapper.appendChild(value);
+                    wrapper.appendChild(description);
+                    wrapper.appendChild(image);
+
+                    // wrapper.css('border', '2px solid green');
+
+                    $('#result').css({
+                        "border-width": "4px",
+                    "border-style" : "double",
+                    "margin-top": "32px",
+                    "margin-left": "-14px",
+                    "margin-right": "107px",
+                        "border-color": "#5bc0de"
+                    }).append(wrapper).show();
+                    $('#word').append(item.rightAnswer).append(" from ").append(item.totalQuestion).show()
+
+                });
+
+                console.log( "ready!" );
+            }
+
+        })
+    });
+
+
+
+});
 
 
 

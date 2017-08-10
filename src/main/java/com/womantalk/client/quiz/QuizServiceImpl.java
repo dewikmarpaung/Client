@@ -29,7 +29,6 @@ public class QuizServiceImpl implements QuizService
     @Autowired
     private QuizRepository quizRepository;
 
-
     @Override
     public List<Quiz> findAllQuizByStatus()
     {
@@ -71,7 +70,6 @@ public class QuizServiceImpl implements QuizService
         {
             score += optionService.findValueByIdOption(Integer.parseInt(idOptionsArray[indexIdOption]));
         }
-
 
         rightAnswer = score;
         List <QuizRules> allQuizRules = quizRulesService.findResult();

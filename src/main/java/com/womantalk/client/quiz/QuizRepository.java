@@ -28,7 +28,6 @@ public interface QuizRepository extends JpaRepository <Quiz, Integer>
 
     List <Quiz> findTop3ByIdQuizLessThanOrderByIdQuizDesc (int id);
 
-
-
+    List<Quiz> findTop3ByQuizType (@Param("idQuizType") Integer idQuizType);
 
 }
