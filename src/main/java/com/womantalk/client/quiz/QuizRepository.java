@@ -20,15 +20,15 @@ public interface QuizRepository extends JpaRepository <Quiz, Integer>
     List <Quiz> getAllDataQuiz (@Param("idQuiz") Integer idQuiz);
 
 
-
     @Query("select q from Quiz q where q.status like 'draf' ")
     List<Quiz> getAllQuizByStatus ();
 
-
     @Query ("select q from Quiz q where q.idQuiz = ?1")
     List <Quiz> getAllQuizByIdQuiz (@Param("idQuiz") Integer idQuiz);
-//    @Query ("select q from Quiz q where q.idQuiz = quiz.idQuiz")
-//    Quiz findQuizByIdQuiz (Quiz quiz);
+
+    List <Quiz> findTop3ByIdQuizLessThanOrderByIdQuizDesc (int id);
+
+    List<Quiz> findTop3ByQuizType (@Param("idQuizType") Integer idQuizType);
 
 
 

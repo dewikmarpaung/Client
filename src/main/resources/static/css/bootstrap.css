@@ -10,6 +10,10 @@ html {
   -webkit-text-size-adjust: 100%;
       -ms-text-size-adjust: 100%;
 }
+result {
+  margin-top: 5px;
+  margin-left: 6px;
+}
 body {
   margin: 0;
 }
@@ -120,6 +124,9 @@ textarea {
 }
 button {
   overflow: visible;
+  width: 630px;
+  margin-left: -12px;
+  margin-top: 24px;
 }
 button,
 select {
@@ -3366,7 +3373,7 @@ fieldset[disabled] .btn-link:focus {
 }
 .btn-block {
   display: block;
-  width: 100%;
+  width: 631px;
 }
 .btn-block + .btn-block {
   margin-top: 5px;

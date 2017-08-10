@@ -4,8 +4,7 @@ import com.womantalk.client.question.Question;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.util.ArrayList;
-import java.util.List;
+import java.util.*;
 
 @Service
 public class OptionServiceImpl implements OptionService {
@@ -19,10 +18,12 @@ public class OptionServiceImpl implements OptionService {
         List<Option> options = optionRepository.findAll();
         List<Option> optionByIdQuestion = new ArrayList<Option>();
         for (Option option : options){
-            if(option.getQuestion().getIdQuestion()==idQuestion){
+            if(option.getQuestion().getIdQuestion()==idQuestion)
+            {
                 optionByIdQuestion.add(option);
             }
         }
+
         return optionByIdQuestion;
     }
 
@@ -42,5 +43,11 @@ public class OptionServiceImpl implements OptionService {
     public Integer findValueByIdOption(Integer idOption)
     {
         return optionRepository.getOne(idOption).getValue();
+    }
+
+    @Override
+    public List<Option> findRightAnswer()
+    {
+        return optionRepository.findRightAnswer();
     }
 }

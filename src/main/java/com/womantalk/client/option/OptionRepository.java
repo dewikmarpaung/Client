@@ -17,4 +17,7 @@ public interface OptionRepository extends JpaRepository<Option, Integer>
         @Query("select o.value from Option  o where o.idOption =?1")
         List <Option> findValueByIdOption (@Param("idOption") Integer idOption);
 
+        @Query ("select  o.value from Option  o where o.value=1")
+        List<Option> findRightAnswer ();
+
 }

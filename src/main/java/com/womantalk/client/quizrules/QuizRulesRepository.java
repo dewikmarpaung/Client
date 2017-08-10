@@ -14,4 +14,6 @@ public interface QuizRulesRepository extends JpaRepository<QuizRules, Integer>
 
     @Query("select qr from QuizRules  qr where ?1 between qr.min and qr.max")
     List<QuizRules> getResult (@Param("score") Integer score);
+
+
 }

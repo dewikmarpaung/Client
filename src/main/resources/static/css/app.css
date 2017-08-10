@@ -26,4 +26,40 @@ img {
 	margin-top: 21px;
 }
 
+#list_quizzes .itemList {
+    list-style: none;
+}
+
+#list_question {
+    margin-left: -11px;
+    margin-top: 21px;
+}
+
+#list_question .questionList {
+    list-style: none;
+}
+
+.optionList{
+    list-style: none;
+}
+
+.optionWrapper_3 {
+    column-count: 3;
+    column-gap: 5px;
+}
+
+.optionWrapper_2 {
+    column-count: 2;
+    column-gap: 5px;
+}
+
+.button {
+    margin-left: 217px;
+    margin-top: 18px;
+}
+/*#result
+{
+
+    border: 2px solid green;
+}*/
 

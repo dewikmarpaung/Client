@@ -35,6 +35,12 @@ public class QuizRules
     @JsonView(View.QuizRules.class)
     private String imageURL;
 
+    @JsonView(View.QuizRules.class)
+    private Integer rightAnswer;
+
+    @JsonView(View.QuizRules.class)
+    private Integer totalQuestion;
+
     @ManyToOne (fetch = FetchType.EAGER)
     @JoinColumn(name = "idQuiz")
   //  @JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
@@ -98,5 +104,21 @@ public class QuizRules
 
     public void setImageURL(String imageURL) {
         this.imageURL = imageURL;
+    }
+
+    public Integer getRightAnswer() {
+        return rightAnswer;
+    }
+
+    public void setRightAnswer(Integer rightAnswer) {
+        this.rightAnswer = rightAnswer;
+    }
+
+    public Integer getTotalQuestion() {
+        return totalQuestion;
+    }
+
+    public void setTotalQuestion(Integer totalQuestion) {
+        this.totalQuestion = totalQuestion;
     }
 }
