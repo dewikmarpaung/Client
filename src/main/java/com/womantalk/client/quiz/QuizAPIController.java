@@ -60,6 +60,15 @@ public class QuizAPIController
         return ModelToResponseMapper.mapThisSuccess(quizzes);
     }
 
+    //related quiz
+
+    @JsonView (View.Quiz.class)
+    @RequestMapping(value ="/API/Quiz/getQuizByIdQuizType", method = RequestMethod.POST)
+    public Response<List<Quiz>> getAllQuizByIdQuizType (@RequestParam ("idQuizType")Integer idQuizType)
+    {
+        return quizService.getAllQuizByIdQuizType(idQuizType);
+    }
+
 /*
     @JsonView (View.AllQuiz.class)
     @RequestMapping(value ="/API/Quiz/getAllOption", method = RequestMethod.GET)

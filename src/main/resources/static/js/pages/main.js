@@ -78,9 +78,12 @@ function LoadFirst() {
         data : jQuery.param({idQuiz : id}),
         dataType: "json",
 
-        success: function (json) {
-            $.each(json.data, function (i, item) {
+        success: function (json)
+        {
+            $.each(json.data, function (i, item)
+            {
                 id = item.idQuiz;
+             //   console.log (id);
                 var image = document.createElement("div");
                 $("<img>").attr('data-id',item.idQuiz)
                     .attr('alt',item.judulQuiz)

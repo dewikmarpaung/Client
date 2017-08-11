@@ -1,6 +1,8 @@
 package com.womantalk.client.quiztype;
 
+import com.fasterxml.jackson.annotation.JsonView;
 import com.womantalk.client.quiz.Quiz;
+import com.womantalk.client.tools.View;
 
 import javax.persistence.*;
 import java.util.Set;
@@ -13,6 +15,8 @@ public class QuizType
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column (columnDefinition = "serial", name = "idQuizType")
+    //@JsonView (View.AllQuiz.class)
+    @JsonView (View.AllQuiz.class)
     private Integer idQuizType;
 
     @Column

@@ -21,41 +21,37 @@ public class Quiz
     @JsonView(View.Quiz.class)
     private Integer idQuiz;
 
-
     @Column(name = "judulQuiz")
     @JsonView(View.Quiz.class)
     private String judulQuiz;
 
-
     @Column(name = "imageURL")
     @JsonView(View.Quiz.class)
     private String imageURL;
-
 
     @Column(name = "status")
     private String status;
 
     @Temporal(TemporalType.TIMESTAMP)
     @Column(name = "draft_date")
-   // @JsonView(View.Public.class)
+
     public Date draft_date;
 
     @Temporal(TemporalType.TIMESTAMP)
- // @JsonView(View.Public.class)
+
     @Column(name = "published_date")
-  //  @JsonView(View.Public.class)
+
     public Date published_date;
 
     @Temporal(TemporalType.TIMESTAMP)
     @Column(name = "last_modified")
-  //  @JsonView(View.Public.class)
+
     public Date last_modified;
 
 
     @ManyToOne (fetch = FetchType.EAGER , cascade = {CascadeType.ALL} )
     @JoinColumn (name = "idQuizType")
-   // @JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
-   // @JsonView(View.Public.class)
+    @JsonView (View.AllQuiz.class)
     private QuizType quizType;
 
     @JsonView (View.AllQuiz.class)

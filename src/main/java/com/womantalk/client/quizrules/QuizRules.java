@@ -44,6 +44,7 @@ public class QuizRules
     @ManyToOne (fetch = FetchType.EAGER)
     @JoinColumn(name = "idQuiz")
   //  @JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
+    @JsonView(View.QuizRules.class)
     private Quiz quiz;
 
     public QuizRules() {

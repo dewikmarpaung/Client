@@ -22,4 +22,9 @@ public class QuizTypeServiceImpl implements QuizTypeService
       }
 
   }
+
+    @Override
+    public List<QuizType> findTop3ByIdQuizType(Integer idQuizType) {
+        return quizTypeRepository.findTop3ByIdQuizType(idQuizType);
+    }
 }

@@ -1,17 +1,21 @@
-var api = "http://localhost:8080/API/Quiz/getQuiz/";
+   //API
+    var api = "http://localhost:8080/API/Quiz/getQuiz/";
+    var resultAPI = "http://localhost:8080/API/Quiz/ShowResultQuiz";
+    var relatedQuizAPI = "http://localhost:8080/API/Quiz/getQuizByIdQuizType";
 
-var resultAPI = "http://localhost:8080/API/Quiz/ShowResultQuiz";
-
-
+    //variable
     var url = new URL(window.location.href);
     var id = url.searchParams.get("idQuiz");
     var result = "";
+    var idQuizType;
 
+    //Detail Quiz
     $.ajax({
         url: api + id,
         type: "GET",
         dataType: "json",
-        success: function (json) {
+        success: function (json)
+        {
             var wrapper = document.createElement("div");
             wrapper.className = "wrapper";
 
@@ -25,8 +29,7 @@ var resultAPI = "http://localhost:8080/API/Quiz/ShowResultQuiz";
             var option;
             var checkboxOption;
 
-            //console.log("id Quiz : " +json.data[0].idQuiz);     //show id quiz
-            //judul quiz
+            //title quiz
             var judulElement = json.data[0].judulQuiz;
             var judulQuiz = document.createElement("div");
             $("<h1>").html(judulElement)
@@ -48,10 +51,14 @@ var resultAPI = "http://localhost:8080/API/Quiz/ShowResultQuiz";
             wrapper.appendChild(judulQuiz);
             wrapper.appendChild(imageQuiz);
 
+            //array quizType
+            var idType = json.data[0].quizType;
+            idQuizType = idType.idQuizType;
+
             //array questions
             var questions = json.data[0].questions;
 
-            //loop array questions
+            //loop array que;stions
             $.each(questions, function (i, item) {
                 console.log("idQuestion : " +item.idQuestion);      //show id question
 
@@ -99,7 +106,8 @@ var resultAPI = "http://localhost:8080/API/Quiz/ShowResultQuiz";
 
                     var lengthOptions = options.length;
 
-                    if (obj.imageURL != null) {     //kalo option image
+                    //if opttion image
+                    if (obj.imageURL != null) {
                         if (lengthOptions % 3 == 0 || lengthOptions == 5) {
                             $("<img>").attr("src", obj.imageURL)
                                 .attr('id-option',obj.idOption)
@@ -134,23 +142,16 @@ var resultAPI = "http://localhost:8080/API/Quiz/ShowResultQuiz";
                                     if(obj.idOption != 0){
                                         result += obj.idOption + ',';
                                     }
-                                    for (var i=0; i<childs.length; i++) {
-                                        /*childs.css('border', '2px solid green');
-                                        if(childs[i].id != 0) {
-                                            var id = childs[i].id;
-                                            childs.removeAttr('css');
-                                        }*/
+                                    for (var i=0; i<childs.length; i++)
+                                    {
                                         if(childs[i].id != 0){
                                             continue;
                                         }
                                         else {
                                             input[i].disabled='true';
-                                            //childs.css('border', '2px solid green');
                                         }
                                     }
-                                 //   alert("id : " + result);
                                 } else {
-                                    //alert('unchecked');
                                     $this.attr('checked',false);
                                     $(this).parents('.optionList').removeAttr('id');
                                     input.attr('disabled',false);
@@ -162,15 +163,11 @@ var resultAPI = "http://localhost:8080/API/Quiz/ShowResultQuiz";
                                     for(var i=0;i<temp.length-2;i++){
                                         result += temp[i] +',';
                                     }
-                                  //  alert("id : " + result);
                                 }
-
-
                             })
                         );
-
-
-                    } else {        //kalo option text
+                    } else {
+                        //if option text
                         $("<h4>").html(obj.text)
                             .attr('id-option',obj.idOption)
                             .attr('id-question',item.idQuestion)
@@ -197,20 +194,13 @@ var resultAPI = "http://localhost:8080/API/Quiz/ShowResultQuiz";
                                         result += obj.idOption + ',';
                                     }
                                     for (var i=0; i<childs.length; i++) {
-                                        /*childs.css('border', '2px solid green');
-                                         if(childs[i].id != 0) {
-                                         var id = childs[i].id;
-                                         childs.removeAttr('css');
-                                         }*/
                                         if(childs[i].id != 0){
                                             continue;
                                         }
                                         else {
                                             input[i].disabled='true';
-                                            //childs.css('border', '2px solid green');
                                         }
                                     }
-                                  //  alert("id : " + result);
                                 } else {
                                     //alert('unchecked');
                                     $this.attr('checked',false);
@@ -224,7 +214,6 @@ var resultAPI = "http://localhost:8080/API/Quiz/ShowResultQuiz";
                                     for(var i=0;i<temp.length-2;i++){
                                         result += temp[i] +',';
                                     }
-                                   // alert("id : " + result);
                                 }
                             })
                         );
@@ -245,25 +234,70 @@ var resultAPI = "http://localhost:8080/API/Quiz/ShowResultQuiz";
                     }
 
                 });
-
                 questionWrapper.appendChild(optionWrapper);
                 wrapper.appendChild(questionWrapper);
-
             });
 
             $('#list_question').append(wrapper);
+
+            //Related Quiz
+            $.ajax
+            ({
+                url: relatedQuizAPI,
+                type: "POST",
+                data: jQuery.param({idQuizType: idQuizType}),
+                dataType: "json",
+                success: function (json)
+                {
+                    console.log(json.data)
+                     $.each(json.data, function (i, quiz)
+                     {
+                         idType = quiz.idQuiz;
+
+                         //image Quiz
+                         var imageRelated = document.createElement("div");
+                         imageRelated.className="image"
+                         $("<img>").attr("src", quiz.imageURL)
+                             .attr('data-id',quiz.idQuiz)
+                             .attr('alt', quiz.judulQuiz)
+                             .css('height','112px')
+                             .css('width','139px')
+                             //.css('padding','72px')
+                             .css('margin-top', '35px')
+                             .appendTo(imageRelated);
+
+                         //title Quiz
+                         var title = document.createElement("div");
+                         $("<h5>").html(quiz.judulQuiz)
+                            .attr('data-id',quiz.idQuiz)
+                            .css('height','98px')
+                            .css('width','87px')
+                             .css('margin-left', '155px')
+                            .css('margin-top', '-76px')
+                            .appendTo(title);
+
+                        var relatedQuiz = document.createElement("li");
+                        relatedQuiz.className = "relatedQuiz";
+                        relatedQuiz.appendChild(imageRelated);
+                        relatedQuiz.appendChild(title);
+                        relatedQuiz.onclick = function () {
+                         window.location.href = "http://localhost:8080/question?idQuiz=" + quiz.idQuiz;  //url
+                     }
+
+                     $('#relatedQuiz').append(relatedQuiz);
+                     });
+                }
+            });
 
         }
     });
 
 
-$( document ).ready(function()
-{
+$( document ).ready(function() {
     var wrapper = document.createElement("div");
     wrapper.className = "button";
     $( "#button" ).click(function()
     {
-       // $( "div" ).show( "slow" );
         $.ajax
         ({
             url: resultAPI,
@@ -272,68 +306,131 @@ $( document ).ready(function()
             data : jQuery.param({idQuiz : id, idOption : result}),
             success: function (json)
             {
+          /*      var quiz = json.data[0].quiz;
+               // console.log (quiz.idQuiz);
+                var idQuizType;
+                    $.each(quiz, function (j, quizType)
+                    {
+
+                        var quizType = quiz.quizType;
+                        idQuizType = quizType.idQuizType;
+
+                    })
+                console.log (idQuizType);*/
+
                 $.each(json.data, function (i, item)
                 {
-                    id = item.idQuiz;
-                    var value = document.createElement("div");
-                    $("<h3>").html(item.value)
-                        .attr('data-id',item.idQuiz)
-                        .css('height','100px')
-                        .css('width','400px')
-                        .css('margin-left', '6px')
-                        .css('margin-top', '4px ')
-                        .appendTo(value);
+                    if (idQuizType == 1)
+                    {
+                        id = item.idQuiz;
+                        var value = document.createElement("div");
+                        $("<h3>").html(item.value)
+                            .attr('data-id',item.idQuiz)
+                            .css('height','100px')
+                            .css('width','400px')
+                            .css('margin-left', '16px')
+                            .css('margin-top', '4px ')
+                            .appendTo(value);
 
-                    var description = document.createElement("div");
-                    $("<h5>").html(item.description)
-                        .attr('data-id',item.idQuiz)
-                        .css('height','100px')
-                        .css('width','400px')
-                        .css('margin-left', '42px')
-                        .css('margin-top', '-63px')
-                        .appendTo(description);
+                        var description = document.createElement("div");
+                        $("<h5>").html(item.description)
+                            .attr('data-id',item.idQuiz)
+                            .css('height','100px')
+                            .css('width','400px')
+                            .css('margin-left', '41px')
+                            .css('margin-top', '-63px')
+                            .appendTo(description);
 
 
-                    var image = document.createElement("div");
-                    $("<img>").attr("src", item.imageURL)
-                        .attr('data-id',item.idQuiz)
-                        .css('height','287px')
-                        .css('width','574px')
-                        .css('padding','15px')
-                        .css('margin-top', ' -82px')
-                        .css('margin-left', '25px')
-                        .appendTo(image);
+                        var image = document.createElement("div");
+                        $("<img>").attr("src", item.imageURL)
+                            .attr('data-id',item.idQuiz)
+                            .css('height','362px')
+                            .css('width','658px')
+                            .css('padding','15px')
+                            .css('margin-top', ' -81px')
+                            .css('margin-left', '28px')
+                            .appendTo(image);
 
-                    var wrapper = document.createElement("div");
-                    wrapper.className = "hasil";
+                        var wrapper = document.createElement("div");
+                        wrapper.className = "hasil";
 
-                    wrapper.appendChild(value);
-                    wrapper.appendChild(description);
-                    wrapper.appendChild(image);
+                        wrapper.appendChild(value);
+                        wrapper.appendChild(description);
+                        wrapper.appendChild(image);
 
-                    // wrapper.css('border', '2px solid green');
 
-                    $('#result').css({
-                        "border-width": "4px",
-                    "border-style" : "double",
-                    "margin-top": "32px",
-                    "margin-left": "-14px",
-                    "margin-right": "107px",
-                        "border-color": "#5bc0de"
-                    }).append(wrapper).show();
-                    $('#word').append(item.rightAnswer).append(" from ").append(item.totalQuestion).show()
+                        $('#result').css({
+                            "border-width": "4px",
+                            "border-style" : "double",
+                            "padding": "4px",
+                            "margin-top": "32px",
+                            "margin-left": "-13px",
+                            "margin-right": "14px",
+                            "border-color": "#5bc0de"
+                        }).append(wrapper).show();
+                    }else
+                    {
+                        id = item.idQuiz;
+                        var value = document.createElement("div");
+                        $("<h3>").html(item.value)
+                            .attr('data-id',item.idQuiz)
+                            .css('height','100px')
+                            .css('width','400px')
+                            .css('margin-left', '16px')
+                            .css('margin-top', '4px ')
+                            .appendTo(value);
+
+                        var description = document.createElement("div");
+                        $("<h5>").html(item.description)
+                            .attr('data-id',item.idQuiz)
+                            .css('height','100px')
+                            .css('width','400px')
+                            .css('margin-left', '41px')
+                            .css('margin-top', '-63px')
+                            .appendTo(description);
+
+
+                        var image = document.createElement("div");
+                        $("<img>").attr("src", item.imageURL)
+                            .attr('data-id',item.idQuiz)
+                            .css('height','362px')
+                            .css('width','658px')
+                            .css('padding','15px')
+                            .css('margin-top', ' -81px')
+                            .css('margin-left', '28px')
+                            .appendTo(image);
+
+
+                        var wrapper = document.createElement("div");
+                        wrapper.className = "hasil";
+
+                        wrapper.appendChild(value);
+                        wrapper.appendChild(description);
+                        wrapper.appendChild(image);
+
+                        // wrapper.css('border', '2px solid green');
+
+                        $('#result').css({
+                            "border-width": "4px",
+                            "border-style" : "double",
+                            "margin-top": "32px",
+                            "margin-left": "-14px",
+                            "margin-right": "107px",
+                            "border-color": "#5bc0de"
+                        }).append(wrapper).show();
+                        $('#word').append(item.rightAnswer).append(" from ").append(item.totalQuestion).show()
+
+                    }
+
 
                 });
-
-                console.log( "ready!" );
             }
 
         })
     });
-
-
-
 });
+
 
 
 

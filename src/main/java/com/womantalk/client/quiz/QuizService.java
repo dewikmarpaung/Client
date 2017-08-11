@@ -16,8 +16,11 @@ public interface QuizService
     Response<List<Quiz>> getAllQuizByStatus (int offset, int limit);
     Response<List<Quiz>> getAllQuizByIdQuiz (Integer idQuiz);
     Response <List<QuizRules>> showResult(long idQuiz, String idOptions);
-
-
-
     List<Quiz> findTop3ByStatusOrderByIdQuizDesc(String status,Integer id);
+
+
+    //related
+   // List<Quiz> findTop3ByQuizType (Integer idQuizType);
+    List<Quiz> findQuizByIdQuizType (Integer idQuizType);
+    Response<List<Quiz>> getAllQuizByIdQuizType (Integer idQuizType);
 }

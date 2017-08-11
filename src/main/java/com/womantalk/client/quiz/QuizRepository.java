@@ -20,7 +20,7 @@ public interface QuizRepository extends JpaRepository <Quiz, Integer>
     List <Quiz> getAllDataQuiz (@Param("idQuiz") Integer idQuiz);
 
 
-    @Query("select q from Quiz q where q.status like 'draf' ")
+    @Query("select q from Quiz q where q.status like 'published' ")
     List<Quiz> getAllQuizByStatus ();
 
     @Query ("select q from Quiz q where q.idQuiz = ?1")
@@ -28,6 +28,8 @@ public interface QuizRepository extends JpaRepository <Quiz, Integer>
 
     List <Quiz> findTop3ByIdQuizLessThanOrderByIdQuizDesc (int id);
 
-    List<Quiz> findTop3ByQuizType (@Param("idQuizType") Integer idQuizType);
-
+ @Query("select q from Quiz q ORDER BY q.idQuiz DESC ")
+    List<Quiz> getAllQuiz ();
+    /*@Query
+    List<Quiz> findTop3ByQuizTypeIdQuizType (@Param("idQuizType") Integer idQuizType);*/
 }

@@ -13,7 +13,8 @@ public class QuizRulesServiceImpl implements QuizRulesService {
 
 
     @Override
-    public List<QuizRules> findResult() {
+    public List<QuizRules> findResult()
+    {
         return quizRulesRepository.findAll();
     }
 

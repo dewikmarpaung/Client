@@ -4,6 +4,7 @@ package com.womantalk.client.quiz;
 import com.womantalk.client.option.OptionService;
 import com.womantalk.client.quizrules.QuizRules;
 import com.womantalk.client.quizrules.QuizRulesService;
+import com.womantalk.client.quiztype.QuizTypeService;
 import com.womantalk.client.tools.ModelToResponseMapper;
 import com.womantalk.client.tools.Response;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -28,6 +29,10 @@ public class QuizServiceImpl implements QuizService
 
     @Autowired
     private QuizRepository quizRepository;
+
+    //Related Quiz
+    @Autowired
+    private QuizTypeService quizTypeService;
 
     @Override
     public List<Quiz> findAllQuizByStatus()
@@ -124,6 +129,50 @@ public class QuizServiceImpl implements QuizService
             quizzes = quizRepository.findTop2ByStatusLessThanOrderByIdQuizDesc(status, lastId);
         }
         return quizzes;*/
+    }
+
+
+
+    //related quiz
+  /*  @Override
+    public List<Quiz> findTop3ByQuizType(Integer idQuizType)
+    {
+        return quizRepository.findTop3ByQuizType(idQuizType);
+    }*/
+
+
+    @Override
+    public List<Quiz> findQuizByIdQuizType(Integer idQuizType) {
+        List<Quiz> quizzes = quizRepository.getAllQuiz();
+        List<Quiz> quizByIdQuizType = new ArrayList<Quiz>();
+        List <Quiz>quizzes1 = new ArrayList<Quiz>();
+        for (Quiz quiz : quizzes)
+        {
+
+            if (quiz.getQuizType().getIdQuizType() == idQuizType)
+            {
+                quizByIdQuizType.add(quiz);
+            }
+        }
+        if (quizByIdQuizType.size() > 6)
+        {
+            quizzes1 = quizByIdQuizType.subList(0, 5);
+        }
+        else
+        {
+            quizzes1 = quizByIdQuizType;
+        }
+           return quizzes1;
+        }
+
+
+
+
+    @Override
+    public Response<List<Quiz>> getAllQuizByIdQuizType(Integer idQuizType)
+    {
+        List<Quiz> quizzes = quizService.findQuizByIdQuizType(idQuizType);
+        return ModelToResponseMapper.mapThisSuccess(quizzes);
     }
 
 }
